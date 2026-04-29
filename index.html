@@ -1807,5 +1807,20 @@
 
   console.log('%c🚀 PAKISTAN FF GUILD Website Ready - Fixed Web3Forms + Removed Cookie Banner', 'color: #FF6A00; font-size: 18px; font-weight: bold;');
 </script>
+
+
+
+
+
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/com/sw.js')
+      .then(reg => console.log('SW registered:', reg))
+      .catch(err => console.log('SW failed:', err));
+  }
+</script>
+
+  
 </body>
 </html>
