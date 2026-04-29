@@ -7,7 +7,6 @@
 
 <meta name="google-site-verification" content="google11c8d08867dbabe8.html" />
 
-
 <link rel="manifest" href="/com/manifest.json">
 <meta name="theme-color" content="#FF6A00">
   
@@ -1181,6 +1180,11 @@
   </ul>
 </nav>
 
+<!-- ========== INSTALL BANNER (AUTO-HIDE) ========== -->
+<div id="installToast" style="display: none; position: fixed; top: 80px; left: 50%; transform: translateX(-50%); background: #FF6A00; color: white; padding: 12px 24px; border-radius: 50px; font-weight: bold; z-index: 9999; box-shadow: 0 4px 15px rgba(0,0,0,0.3); backdrop-filter: blur(10px); cursor: pointer;">
+  📲 Install PAKISTAN FF GUILD – Tap to add to home screen
+</div>
+
 <main>
   <!-- ========== 1. HOME PAGE ========== -->
   <section id="home" class="container">
@@ -1782,13 +1786,57 @@
   // No cookie agreement popup will appear.
 
   // ==========================================
-  // 11. ANALYTICS
+  // 11. PWA INSTALL BANNER (Auto-hide toast + install prompt)
+  // ==========================================
+  let deferredPrompt;
+  const toast = document.getElementById('installToast');
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    if (toast) {
+      toast.style.display = 'block';
+      // Auto hide after 5 seconds
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        setTimeout(() => {
+          toast.style.display = 'none';
+          toast.style.opacity = '1';
+        }, 300);
+      }, 5000);
+      // On tap, trigger install
+      toast.addEventListener('click', () => {
+        if (deferredPrompt) {
+          deferredPrompt.prompt();
+          deferredPrompt.userChoice.then(() => {
+            deferredPrompt = null;
+          });
+          toast.style.display = 'none';
+        }
+      });
+    }
+  });
+  window.addEventListener('appinstalled', () => {
+    if (toast) toast.style.display = 'none';
+    deferredPrompt = null;
+  });
+
+  // ==========================================
+  // 12. SERVICE WORKER REGISTRATION
+  // ==========================================
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/com/sw.js')
+      .then(reg => console.log('SW registered:', reg))
+      .catch(err => console.log('SW failed:', err));
+  }
+
+  // ==========================================
+  // 13. ANALYTICS
   // ==========================================
   console.log('[Analytics] Page view: PAKISTAN FF GUILD - https://pakistanffguild.github.io/com/');
   console.log('[Web3Forms] Configured with AJAX, no redirect, no 404 error.');
 
   // ==========================================
-  // 12. SMOOTH SCROLL & ACTIVE NAV
+  // 14. SMOOTH SCROLL & ACTIVE NAV
   // ==========================================
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
@@ -1809,22 +1857,8 @@
     });
   });
 
-  console.log('%c🚀 PAKISTAN FF GUILD Website Ready - Fixed Web3Forms + Removed Cookie Banner', 'color: #FF6A00; font-size: 18px; font-weight: bold;');
+  console.log('%c🚀 PAKISTAN FF GUILD Website Ready - Fixed Web3Forms + Removed Cookie Banner + PWA Install Toast', 'color: #FF6A00; font-size: 18px; font-weight: bold;');
 </script>
 
-
-
-
-
-
-<script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/com/sw.js')
-      .then(reg => console.log('SW registered:', reg))
-      .catch(err => console.log('SW failed:', err));
-  }
-</script>
-
-  
 </body>
 </html>
