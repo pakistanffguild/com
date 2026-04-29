@@ -1,9 +1,10 @@
-
 const CACHE_NAME = 'pff-guild-v1';
 const urlsToCache = [
   '/com/',
   '/com/index.html',
-  '/com/manifest.json'
+  '/com/manifest.json',
+  '/com/icon-192.png',
+  '/com/icon-512.png'
 ];
 
 self.addEventListener('install', event => {
