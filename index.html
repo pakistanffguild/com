@@ -908,39 +908,6 @@
       color: var(--ff-orange);
     }
 
-    /* Cookie Banner */
-    .cookie-banner {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      background: #11131F;
-      padding: 1.2rem;
-      text-align: center;
-      z-index: 1050;
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-      align-items: center;
-      border-top: 2px solid var(--ff-orange);
-      font-size: 0.9rem;
-    }
-
-    .cookie-banner button {
-      background: var(--ff-orange);
-      border: none;
-      padding: 10px 28px;
-      border-radius: 40px;
-      color: white;
-      font-weight: 700;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    .cookie-banner button:hover {
-      background: var(--ff-amber);
-    }
-
     /* Footer */
     footer {
       background: #080A10;
@@ -1132,10 +1099,6 @@
       .btn-primary {
         padding: 12px 24px;
         font-size: 0.85rem;
-      }
-      .cookie-banner {
-        flex-direction: column;
-        gap: 0.8rem;
       }
       .member-card {
         max-width: 180px;
@@ -1382,7 +1345,7 @@
     </div>
   </section>
 
-  <!-- ========== 6. CONTACT FORM (Web3Forms with Your Key) ========== -->
+  <!-- ========== 6. CONTACT FORM (Web3Forms with AJAX - NO 404) ========== -->
   <section id="contact" class="container">
     <div class="section-header">
       <h2><i class="fas fa-envelope"></i> Contact & Join Us</h2>
@@ -1391,11 +1354,10 @@
     </div>
     <div class="grid-2">
       <div class="glass" style="padding: 2rem;">
-        <!-- Web3Forms Integration with YOUR Access Key -->
-        <form id="contactFormSys" action="https://api.web3forms.com/submit" method="POST">
+        <!-- Web3Forms Integration with AJAX (redirect removed) -->
+        <form id="contactFormSys">
           <input type="hidden" name="access_key" value="90fae2cc-9f3a-4893-9357-f08635131ed4">
-          <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
-          <input type="hidden" name="redirect" value="https://pakistanffguild.github.io/com/thank-you">
+          <input type="checkbox" name="botcheck" style="display: none;">
           
           <h3 style="color: var(--ff-orange); margin-bottom: 1.5rem;"><i class="fas fa-pen-alt"></i> Guild Application Form</h3>
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
@@ -1580,16 +1542,6 @@
 <!-- Combined Legal Modal -->
 <div id="legalModal" class="modal"><div class="modal-content"><button class="modal-close" onclick="closeModal('legalModal')">&times;</button><h2><i class="fas fa-balance-scale"></i> Legal Information</h2><p>Please select a specific policy to view:</p><div style="display: flex; flex-direction: column; gap: 10px; margin-top: 1rem;"><button onclick="closeModal('legalModal'); openModal('privacyModal');" class="btn-outline"><i class="fas fa-shield-alt"></i> Privacy Policy</button><button onclick="closeModal('legalModal'); openModal('termsModal');" class="btn-outline"><i class="fas fa-gavel"></i> Terms of Service</button><button onclick="closeModal('legalModal'); openModal('cookieModal');" class="btn-outline"><i class="fas fa-cookie-bite"></i> Cookie Policy</button><button onclick="closeModal('legalModal'); openModal('disclaimerModal');" class="btn-outline"><i class="fas fa-exclamation-triangle"></i> Disclaimer</button></div></div></div>
 
-<!-- ========== COOKIE CONSENT BANNER ========== -->
-<div id="cookieBanner" class="cookie-banner">
-  <span><i class="fas fa-cookie-bite"></i> This website uses cookies to enhance your experience. By continuing, you agree to our Cookie Policy.</span>
-  <div style="display: flex; gap: 10px;">
-    <button id="acceptCookieBtn"><i class="fas fa-check"></i> Accept All</button>
-    <button id="rejectCookieBtn" style="background: #555;"><i class="fas fa-times"></i> Reject</button>
-    <a href="#" id="cookiePolicyLink" style="color: var(--ff-amber); text-decoration: underline; font-size: 0.85rem;">Learn More</a>
-  </div>
-</div>
-
 <!-- ========== SCRIPTS ========== -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -1618,54 +1570,42 @@
   waFloat.addEventListener('click', function(e) { e.stopPropagation(); waMenuOpen = !waMenuOpen; waMenu.style.display = waMenuOpen ? 'flex' : 'none'; });
   document.addEventListener('click', function(e) { if (!waFloat.contains(e.target) && !waMenu.contains(e.target)) { waMenuOpen = false; waMenu.style.display = 'none'; } });
 
+  // ==========================================
+  // 3. GUILD MEMBERS SLIDER (Swiper.js)
+  // ==========================================
+  const membersData = [
+    { name: 'Sᴋɪᴘᴘᴇʀ ꜰꜰ', uid: '7733571040', points: 267, role: 'Rusher' },
+    { name: '7xi Onefire', uid: '4526468151', points: 215, role: 'Rusher' },
+    { name: 'AKRAM FF', uid: '7664548173', points: 205, role: 'Rusher' },
+    { name: 'AHMAD FF', uid: '365141803', points: 201, role: 'Rusher' },
+    { name: 'ADEEL KING', uid: '8694455287', points: 165, role: 'Rusher' },
+    { name: 'VINCENZO FF', uid: '8108933962', points: 162, role: 'Rusher' },
+    { name: 'CYRUS FF', uid: '4395193209', points: 156, role: 'Rusher' },
+    { name: 'HISOKA FF', uid: '4395193209', points: 144, role: 'Rusher' },
+    { name: 'HK★GAMER', uid: '11969622486 ', points: 135, role: 'Rusher' },
+    { name: 'JERRY FF', uid: '10609686392', points: 132, role: 'Rusher' }
+  ];
 
+  const sliderWrapper = document.getElementById('membersSliderWrapper');
+  const ffAvatarColors = ['FF6A00', 'FF8C2E', 'FFB347', 'FF4500', 'FF6347', 'FF7F50', 'FFA500', 'FFD700', 'FF8C00', 'FF6600'];
 
-
-
-
-
-// ==========================================
-// 3. GUILD MEMBERS SLIDER (Swiper.js) - Updated with Real Members
-// ==========================================
-const membersData = [
-  { name: 'Sᴋɪᴘᴘᴇʀ ꜰꜰ', uid: '7733571040', points: 267, role: 'Rusher' },
-  { name: '7xi Onefire', uid: '4526468151', points: 215, role: 'Rusher' },
-  { name: 'AKRAM FF', uid: '7664548173', points: 205, role: 'Rusher' },
-  { name: 'AHMAD FF', uid: '365141803', points: 201, role: 'Rusher' },
-  { name: 'ADEEL KING', uid: '8694455287', points: 165, role: 'Rusher' },
-  { name: 'VINCENZO FF', uid: '8108933962', points: 162, role: 'Rusher' },
-  { name: 'CYRUS FF', uid: '4395193209', points: 156, role: 'Rusher' },
-  { name: 'HISOKA FF', uid: '4395193209', points: 144, role: 'Rusher' },
-  { name: 'HK★GAMER', uid: '11969622486 ', points: 135, role: 'Rusher' },
-  { name: 'JERRY FF', uid: '10609686392', points: 132, role: 'Rusher' }
-];
-
-const sliderWrapper = document.getElementById('membersSliderWrapper');
-const ffAvatarColors = ['FF6A00', 'FF8C2E', 'FFB347', 'FF4500', 'FF6347', 'FF7F50', 'FFA500', 'FFD700', 'FF8C00', 'FF6600'];
-
-membersData.forEach((member, index) => {
-  const bgColor = ffAvatarColors[index % ffAvatarColors.length];
-  
-  const slide = document.createElement('div');
-  slide.className = 'swiper-slide';
-  slide.innerHTML = `
-    <div class="member-card">
-      <img src="https://ui-avatars.com/api/?name=${encodeURIComponent(member.name)}&background=${bgColor}&color=fff&size=160&bold=true&font-size=0.4&length=2" 
-           alt="${member.name}" loading="lazy" 
-           onerror="this.src='https://placehold.co/80x80/${bgColor}/white?text=FF'">
-      <div class="member-name">${member.name}</div>
-      <div class="member-uid">UID: ${member.uid}</div>
-      <div class="member-glory">${member.role === 'Rusher' ? '🔥' : '🛡️'} ${member.points} pts</div>
-      <span class="badge ${member.role === 'Rusher' ? 'badge-rusher' : 'badge-survivor'}">${member.role === 'Rusher' ? '⚔️ Rusher' : '🛡️ Survivor'}</span>
-    </div>
-  `;
-  sliderWrapper.appendChild(slide);
-});
-
-
-  
-
-  
+  membersData.forEach((member, index) => {
+    const bgColor = ffAvatarColors[index % ffAvatarColors.length];
+    const slide = document.createElement('div');
+    slide.className = 'swiper-slide';
+    slide.innerHTML = `
+      <div class="member-card">
+        <img src="https://ui-avatars.com/api/?name=${encodeURIComponent(member.name)}&background=${bgColor}&color=fff&size=160&bold=true&font-size=0.4&length=2" 
+             alt="${member.name}" loading="lazy" 
+             onerror="this.src='https://placehold.co/80x80/${bgColor}/white?text=FF'">
+        <div class="member-name">${member.name}</div>
+        <div class="member-uid">UID: ${member.uid}</div>
+        <div class="member-glory">${member.role === 'Rusher' ? '🔥' : '🛡️'} ${member.points} pts</div>
+        <span class="badge ${member.role === 'Rusher' ? 'badge-rusher' : 'badge-survivor'}">${member.role === 'Rusher' ? '⚔️ Rusher' : '🛡️ Survivor'}</span>
+      </div>
+    `;
+    sliderWrapper.appendChild(slide);
+  });
 
   // Initialize Swiper
   const swiper = new Swiper('.mySwiper', {
@@ -1724,29 +1664,53 @@ membersData.forEach((member, index) => {
   document.getElementById('blogSearch').addEventListener('keyup', function(e) { if (e.key === 'Enter') document.getElementById('searchBlogBtn').click(); });
 
   // ==========================================
-  // 6. WEB3FORMS CONTACT FORM (with your access key)
+  // 6. WEB3FORMS CONTACT FORM - FIXED (AJAX, NO REDIRECT, NO 404)
   // ==========================================
-  document.getElementById('contactFormSys').addEventListener('submit', function(e) {
+  const contactForm = document.getElementById('contactFormSys');
+  const statusDiv = document.getElementById('contactStatus');
+
+  contactForm.addEventListener('submit', async function(e) {
+    e.preventDefault();
     const name = document.getElementById('contactName').value.trim();
     const uid = document.getElementById('contactUID').value.trim();
     const phone = document.getElementById('contactPhone').value.trim();
     const msg = document.getElementById('contactMsg').value.trim();
-    const statusEl = document.getElementById('contactStatus');
     
     if (!name || !uid || !phone || !msg) {
-      e.preventDefault();
-      statusEl.innerHTML = '<span style="color:#ff6a00;"><i class="fas fa-exclamation-circle"></i> Please fill all required fields.</span>';
+      statusDiv.innerHTML = '<span style="color:#ff6a00;"><i class="fas fa-exclamation-circle"></i> Please fill all required fields.</span>';
       return;
     }
     
-    // Store in localStorage as backup
-    const application = { name, uid, phone, email: document.getElementById('contactEmail').value, role: document.getElementById('contactRole').value, rank: document.getElementById('contactRank').value, message: msg, date: new Date().toISOString() };
-    let applications = JSON.parse(localStorage.getItem('ff_applications') || '[]');
-    applications.push(application);
-    localStorage.setItem('ff_applications', JSON.stringify(applications));
+    statusDiv.innerHTML = '<span style="color:#a5d6ff;"><i class="fas fa-spinner fa-pulse"></i> Submitting your application...</span>';
     
-    statusEl.innerHTML = '<span style="color:#a5d6ff;"><i class="fas fa-spinner fa-spin"></i> Submitting your application to Web3Forms...</span>';
-    console.log('[Web3Forms] Application submitted with access key: 90fae2cc-9f3a-4893-9357-f08635131ed4');
+    const formData = new FormData(contactForm);
+    const data = Object.fromEntries(formData.entries());
+    data.botcheck = false;
+    
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      const result = await response.json();
+      
+      if (result.success) {
+        // Store backup in localStorage
+        const application = { name, uid, phone, email: document.getElementById('contactEmail').value, role: document.getElementById('contactRole').value, rank: document.getElementById('contactRank').value, message: msg, date: new Date().toISOString() };
+        let applications = JSON.parse(localStorage.getItem('ff_applications') || '[]');
+        applications.push(application);
+        localStorage.setItem('ff_applications', JSON.stringify(applications));
+        
+        statusDiv.innerHTML = '<span style="color:#a5d6ff;"><i class="fas fa-check-circle"></i> ✅ Application sent successfully! Our elders will contact you on WhatsApp within 24 hours.</span>';
+        contactForm.reset();
+      } else {
+        statusDiv.innerHTML = '<span style="color:#ff6a00;"><i class="fas fa-exclamation-triangle"></i> Submission failed. Please try again or contact us directly on WhatsApp.</span>';
+      }
+    } catch (error) {
+      console.error('Web3Forms Error:', error);
+      statusDiv.innerHTML = '<span style="color:#ff6a00;"><i class="fas fa-network-wired"></i> Network error. Please use WhatsApp directly: 0344 7041131</span>';
+    }
   });
 
   // ==========================================
@@ -1808,19 +1772,16 @@ membersData.forEach((member, index) => {
   document.getElementById('openDisclaimerFooter').addEventListener('click', function(e) { e.preventDefault(); openModal('disclaimerModal'); });
 
   // ==========================================
-  // 10. COOKIE BANNER
+  // 10. COOKIE BANNER - REMOVED (no banner, no consent)
   // ==========================================
-  const cookieBanner = document.getElementById('cookieBanner');
-  document.getElementById('acceptCookieBtn').addEventListener('click', function() { cookieBanner.style.display = 'none'; localStorage.setItem('cookieAccepted', 'true'); });
-  document.getElementById('rejectCookieBtn').addEventListener('click', function() { cookieBanner.style.display = 'none'; localStorage.setItem('cookieAccepted', 'false'); });
-  document.getElementById('cookiePolicyLink').addEventListener('click', function(e) { e.preventDefault(); openModal('cookieModal'); });
-  if (localStorage.getItem('cookieAccepted')) cookieBanner.style.display = 'none';
+  // Cookie banner has been completely removed as requested.
+  // No cookie agreement popup will appear.
 
   // ==========================================
   // 11. ANALYTICS
   // ==========================================
   console.log('[Analytics] Page view: PAKISTAN FF GUILD - https://pakistanffguild.github.io/com/');
-  console.log('[Web3Forms] Configured with access key: 90fae2cc-9f3a-4893-9357-f08635131ed4');
+  console.log('[Web3Forms] Configured with AJAX, no redirect, no 404 error.');
 
   // ==========================================
   // 12. SMOOTH SCROLL & ACTIVE NAV
@@ -1844,8 +1805,7 @@ membersData.forEach((member, index) => {
     });
   });
 
-  console.log('%c🚀 PAKISTAN FF GUILD Website Ready - https://pakistanffguild.github.io/com/', 'color: #FF6A00; font-size: 18px; font-weight: bold;');
-  console.log('%cWeb3Forms Active | Security Enabled | Slider Ready', 'color: #FFB347;');
+  console.log('%c🚀 PAKISTAN FF GUILD Website Ready - Fixed Web3Forms + Removed Cookie Banner', 'color: #FF6A00; font-size: 18px; font-weight: bold;');
 </script>
 </body>
 </html>
