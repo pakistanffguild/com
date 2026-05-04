@@ -1579,47 +1579,57 @@
   // 2. WHATSAPP CORNER TOGGLE
   // ==========================================
   const waFloat = document.getElementById('waFloatBtn');
-  const waMenu = document.getElementById('waMenu');
-  let waMenuOpen = false;
-  waFloat.addEventListener('click', function(e) { e.stopPropagation(); waMenuOpen = !waMenuOpen; waMenu.style.display = waMenuOpen ? 'flex' : 'none'; });
-  document.addEventListener('click', function(e) { if (!waFloat.contains(e.target) && !waMenu.contains(e.target)) { waMenuOpen = false; waMenu.style.display = 'none'; } });
 
-  // ==========================================
-  // 3. GUILD MEMBERS SLIDER (Swiper.js)
-  // ==========================================
-  const membersData = [
-    { name: 'Sᴋɪᴘᴘᴇʀ ꜰꜰ', uid: '7733571040', points: 267, role: 'Rusher' },
-    { name: '7xi Onefire', uid: '4526468151', points: 215, role: 'Rusher' },
-    { name: 'AKRAM FF', uid: '7664548173', points: 205, role: 'Rusher' },
-    { name: 'AHMAD FF', uid: '365141803', points: 201, role: 'Rusher' },
-    { name: 'ADEEL KING', uid: '8694455287', points: 165, role: 'Rusher' },
-    { name: 'VINCENZO FF', uid: '8108933962', points: 162, role: 'Rusher' },
-    { name: 'CYRUS FF', uid: '4395193209', points: 156, role: 'Rusher' },
-    { name: 'HISOKA FF', uid: '4395193209', points: 144, role: 'Rusher' },
-    { name: 'HK★GAMER', uid: '11969622486 ', points: 135, role: 'Rusher' },
-    { name: 'JERRY FF', uid: '10609686392', points: 132, role: 'Rusher' }
-  ];
 
-  const sliderWrapper = document.getElementById('membersSliderWrapper');
-  const ffAvatarColors = ['FF6A00', 'FF8C2E', 'FFB347', 'FF4500', 'FF6347', 'FF7F50', 'FFA500', 'FFD700', 'FF8C00', 'FF6600'];
 
-  membersData.forEach((member, index) => {
-    const bgColor = ffAvatarColors[index % ffAvatarColors.length];
-    const slide = document.createElement('div');
-    slide.className = 'swiper-slide';
-    slide.innerHTML = `
-      <div class="member-card">
-        <img src="https://ui-avatars.com/api/?name=${encodeURIComponent(member.name)}&background=${bgColor}&color=fff&size=160&bold=true&font-size=0.4&length=2" 
-             alt="${member.name}" loading="lazy" 
-             onerror="this.src='https://placehold.co/80x80/${bgColor}/white?text=FF'">
-        <div class="member-name">${member.name}</div>
-        <div class="member-uid">UID: ${member.uid}</div>
-        <div class="member-glory">${member.role === 'Rusher' ? '🔥' : '🛡️'} ${member.points} pts</div>
-        <span class="badge ${member.role === 'Rusher' ? 'badge-rusher' : 'badge-survivor'}">${member.role === 'Rusher' ? '⚔️ Rusher' : '🛡️ Survivor'}</span>
-      </div>
-    `;
-    sliderWrapper.appendChild(slide);
-  });
+
+
+
+
+
+// ==========================================
+// 3. GUILD MEMBERS SLIDER (Updated Data)
+// ==========================================
+const membersData = [
+  { name: '7xi OnefireX', uid: '4526468151', points: 242, role: 'Rusher' },
+  { name: 'Sᴋɪᴘᴘᴇʀ ꜰꜰ', uid: '7733571040', points: 224, role: 'Rusher' },
+  { name: 'AKRAM FF', uid: '7664548173', points: 220, role: 'Rusher' },
+  { name: 'Agent FF', uid: '9036153270', points: 200, role: 'Rusher' },
+  { name: 'AHMAD FF', uid: '365141803', points: 197, role: 'Rusher' },
+  { name: 'Crusher FF', uid: '7538898492', points: 172, role: 'Rusher' },
+  { name: 'White FF', uid: '13059239246', points: 169, role: 'Rusher' },
+  { name: 'Cyrus FF', uid: '4395193209', points: 153, role: 'Rusher' },
+  { name: 'Introvert FF', uid: '8213838244', points: 146, role: 'Servivor' },
+  { name: 'HISOKA FF', uid: '4395193209', points: 121, role: 'Rusher' }
+];
+
+const sliderWrapper = document.getElementById('membersSliderWrapper');
+const ffAvatarColors = ['FF6A00', 'FF8C2E', 'FFB347', 'FF4500', 'FF6347', 'FF7F50', 'FFA500', 'FFD700', 'FF8C00', 'FF6600'];
+
+membersData.forEach((member, index) => {
+  const bgColor = ffAvatarColors[index % ffAvatarColors.length];
+  const slide = document.createElement('div');
+  slide.className = 'swiper-slide';
+  slide.innerHTML = `
+    <div class="member-card">
+      <img src="https://ui-avatars.com/api/?name=${encodeURIComponent(member.name)}&background=${bgColor}&color=fff&size=160&bold=true&font-size=0.4&length=2" 
+           alt="${member.name}" loading="lazy" 
+           onerror="this.src='https://placehold.co/80x80/${bgColor}/white?text=FF'">
+      <div class="member-name">${member.name}</div>
+      <div class="member-uid">UID: ${member.uid}</div>
+      <div class="member-glory">🔥 ${member.points} pts</div>
+      <span class="badge badge-rusher">⚔️ Rusher</span>
+    </div>
+  `;
+  sliderWrapper.appendChild(slide);
+});
+
+
+
+
+
+
+  
 
   // Initialize Swiper
   const swiper = new Swiper('.mySwiper', {
