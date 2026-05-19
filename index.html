@@ -1815,39 +1815,93 @@ const waMenu = document.getElementById('waMenu');
   // No cookie agreement popup will appear.
 
   // ==========================================
-  // 11. PWA INSTALL BANNER (Auto-hide toast + install prompt)
-  // ==========================================
-  let deferredPrompt;
-  const toast = document.getElementById('installToast');
-  window.addEventListener('beforeinstallprompt', (e) => {
+// PWA INSTALL BANNER (5 sec show, then hide, no show after install)
+// ==========================================
+let deferredPrompt;
+let autoHideTimeout;
+let isAppInstalled = false;
+let hasShown = false;  // Track if already shown once
+
+const toast = document.getElementById('installToast');
+const closeBtn = document.getElementById('closeInstallToast');
+
+// Check if app is already installed on load
+window.addEventListener('load', () => {
+    if (window.matchMedia('(display-mode: standalone)').matches) {
+        isAppInstalled = true;
+        if (toast) toast.style.display = 'none';
+    }
+});
+
+// Listen for display mode change (when app gets installed)
+window.matchMedia('(display-mode: standalone)').addEventListener('change', (e) => {
+    if (e.matches) {
+        isAppInstalled = true;
+        if (toast) toast.style.display = 'none';
+    }
+});
+
+window.addEventListener('beforeinstallprompt', (e) => {
+    // Don't show if app already installed OR already shown once
+    if (isAppInstalled || hasShown) return;
+    
     e.preventDefault();
     deferredPrompt = e;
+    
     if (toast) {
-      toast.style.display = 'flex';
-      // Auto hide after 5 seconds
-      setTimeout(() => {
-        toast.style.opacity = '0';
-        setTimeout(() => {
-          toast.style.display = 'none';
-          toast.style.opacity = '1';
-        }, 300);
-      }, 5000);
-      // On tap, trigger install
-      toast.addEventListener('click', () => {
-        if (deferredPrompt) {
-          deferredPrompt.prompt();
-          deferredPrompt.userChoice.then(() => {
-            deferredPrompt = null;
-          });
-          toast.style.display = 'none';
-        }
-      });
+        hasShown = true;  // Mark as shown
+        toast.style.display = 'flex';
+        toast.style.opacity = '1';
+        
+        // Auto hide after 5 seconds
+        if (autoHideTimeout) clearTimeout(autoHideTimeout);
+        
+        autoHideTimeout = setTimeout(() => {
+            toast.style.opacity = '0';
+            setTimeout(() => {
+                toast.style.display = 'none';
+                toast.style.opacity = '1';
+            }, 300);
+        }, 5000);
     }
-  });
-  window.addEventListener('appinstalled', () => {
+});
+
+// Click on banner to install
+if (toast) {
+    toast.addEventListener('click', (e) => {
+        if (e.target === closeBtn || closeBtn.contains(e.target)) return;
+        
+        if (deferredPrompt) {
+            deferredPrompt.prompt();
+            deferredPrompt.userChoice.then((result) => {
+                if (result.outcome === 'accepted') {
+                    isAppInstalled = true;
+                }
+                deferredPrompt = null;
+            });
+            toast.style.display = 'none';
+            if (autoHideTimeout) clearTimeout(autoHideTimeout);
+        }
+    });
+}
+
+// Close button
+if (closeBtn) {
+    closeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toast.style.display = 'none';
+        deferredPrompt = null;
+        if (autoHideTimeout) clearTimeout(autoHideTimeout);
+    });
+}
+
+// When app successfully installed
+window.addEventListener('appinstalled', () => {
+    isAppInstalled = true;
     if (toast) toast.style.display = 'none';
     deferredPrompt = null;
-  });
+    if (autoHideTimeout) clearTimeout(autoHideTimeout);
+});
 
   // ==========================================
   // 12. SERVICE WORKER REGISTRATION
