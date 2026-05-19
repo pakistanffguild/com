@@ -1816,7 +1816,7 @@ const waMenu = document.getElementById('waMenu');
 
 
 // ==========================================
-// PWA INSTALL BANNER (FIXED)
+// PWA INSTALL BANNER (FINAL - FORCE HIDE)
 // ==========================================
 let deferredPrompt;
 let autoHideTimeout;
@@ -1824,18 +1824,41 @@ let autoHideTimeout;
 const toast = document.getElementById('installToast');
 const closeBtn = document.getElementById('closeInstallToast');
 
+// ✅ Check if app is installed (Multiple methods)
 function isAppInstalled() {
-    return window.matchMedia('(display-mode: standalone)').matches || 
-           window.navigator.standalone === true;
+    // Method 1: Check display mode
+    if (window.matchMedia('(display-mode: standalone)').matches) {
+        return true;
+    }
+    // Method 2: iOS check
+    if (window.navigator.standalone === true) {
+        return true;
+    }
+    // Method 3: Check if launched from home screen
+    if (localStorage.getItem('pwaInstalled') === 'true') {
+        return true;
+    }
+    return false;
 }
 
-window.addEventListener('DOMContentLoaded', function() {
+// ✅ IMMEDIATELY hide if installed (runs before anything else)
+if (isAppInstalled()) {
+    if (toast) {
+        toast.style.display = 'none';
+        console.log('Banner hidden - App is installed');
+    }
+}
+
+// ✅ Also check on page load
+window.addEventListener('load', function() {
     if (isAppInstalled()) {
         if (toast) toast.style.display = 'none';
     }
 });
 
+// ✅ beforeinstallprompt event
 window.addEventListener('beforeinstallprompt', (e) => {
+    // Force check again
     if (isAppInstalled()) {
         if (toast) toast.style.display = 'none';
         return;
@@ -1844,7 +1867,7 @@ window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
     
-    if (toast) {
+    if (toast && !isAppInstalled()) {
         toast.style.display = 'flex';
         toast.style.opacity = '1';
         
@@ -1860,13 +1883,17 @@ window.addEventListener('beforeinstallprompt', (e) => {
     }
 });
 
+// ✅ Banner click
 if (toast) {
     toast.addEventListener('click', (e) => {
         if (e.target === closeBtn || closeBtn.contains(e.target)) return;
         
         if (deferredPrompt) {
             deferredPrompt.prompt();
-            deferredPrompt.userChoice.then(() => {
+            deferredPrompt.userChoice.then((result) => {
+                if (result.outcome === 'accepted') {
+                    localStorage.setItem('pwaInstalled', 'true');
+                }
                 deferredPrompt = null;
             });
             toast.style.display = 'none';
@@ -1875,6 +1902,7 @@ if (toast) {
     });
 }
 
+// ✅ Close button
 if (closeBtn) {
     closeBtn.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -1884,7 +1912,9 @@ if (closeBtn) {
     });
 }
 
+// ✅ App installed event
 window.addEventListener('appinstalled', () => {
+    localStorage.setItem('pwaInstalled', 'true');
     if (toast) toast.style.display = 'none';
     deferredPrompt = null;
     if (autoHideTimeout) clearTimeout(autoHideTimeout);
