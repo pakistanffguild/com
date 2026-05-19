@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline - PAKISTAN FF GUILD</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a15, #1a1a2e);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+        }
+        .offline-container {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 400px;
+            border: 1px solid #FF6A00;
+        }
+        h1 {
+            color: #FF6A00;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        p {
+            color: #ccc;
+            margin-bottom: 1.5rem;
+        }
+        button {
+            background: #FF6A00;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 30px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="offline-container">
+        <h1>📡 Offline</h1>
+        <p>You are currently offline. Please check your internet connection and try again.</p>
+        <button onclick="location.reload()">Retry ↻</button>
+        <p style="margin-top: 1rem; font-size: 0.8rem;">PAKISTAN FF GUILD will work again when you're back online.</p>
+    </div>
+</body>
+</html>
