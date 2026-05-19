@@ -1180,8 +1180,7 @@
   </ul>
 </nav>
 
-
-<!-- ========== INSTALL BANNER ========== -->
+<!-- ========== INSTALL BANNER (FIXED - SINGLE DISPLAY PROPERTY) ========== -->
 <div id="installToast" style="display: none; position: fixed; top: 70px; left: 0; width: 100%; background: #FF6A00; color: white; padding: 12px 16px; font-weight: bold; z-index: 9999; box-shadow: 0 2px 10px rgba(0,0,0,0.2); cursor: pointer; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
   <div style="display: flex; align-items: center; gap: 12px;">
     <img src="/com/icon-192.png" alt="App Icon" style="width: 32px; height: 32px; border-radius: 8px;">
@@ -1584,15 +1583,6 @@ const waMenu = document.getElementById('waMenu');
   waFloat.addEventListener('click', function(e) { e.stopPropagation(); waMenuOpen = !waMenuOpen; waMenu.style.display = waMenuOpen ? 'flex' : 'none'; });
   document.addEventListener('click', function(e) { if (!waFloat.contains(e.target) && !waMenu.contains(e.target)) { waMenuOpen = false; waMenu.style.display = 'none'; } });
 
-
-
-
-
-
-
-
-
-  
   // ==========================================
   // 3. GUILD MEMBERS SLIDER (Swiper.js)
   // ==========================================
@@ -1629,20 +1619,6 @@ const waMenu = document.getElementById('waMenu');
     `;
     sliderWrapper.appendChild(slide);
   });
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
 
   // Initialize Swiper
   const swiper = new Swiper('.mySwiper', {
@@ -1809,119 +1785,86 @@ const waMenu = document.getElementById('waMenu');
   document.getElementById('openDisclaimerFooter').addEventListener('click', function(e) { e.preventDefault(); openModal('disclaimerModal'); });
 
   // ==========================================
-  // 10. COOKIE BANNER - REMOVED (no banner, no consent)
+  // 10. PWA INSTALL BANNER (FINAL FIXED - NO DUPLICATE DISPLAY)
   // ==========================================
-  // Cookie banner has been completely removed as requested.
-  // No cookie agreement popup will appear.
+  let deferredPrompt;
+  let autoHideTimeout;
 
+  const toast = document.getElementById('installToast');
+  const closeBtn = document.getElementById('closeInstallToast');
 
-// ==========================================
-// PWA INSTALL BANNER (FINAL - FORCE HIDE)
-// ==========================================
-let deferredPrompt;
-let autoHideTimeout;
-
-const toast = document.getElementById('installToast');
-const closeBtn = document.getElementById('closeInstallToast');
-
-// ✅ Check if app is installed (Multiple methods)
-function isAppInstalled() {
-    // Method 1: Check display mode
-    if (window.matchMedia('(display-mode: standalone)').matches) {
-        return true;
-    }
-    // Method 2: iOS check
-    if (window.navigator.standalone === true) {
-        return true;
-    }
-    // Method 3: Check if launched from home screen
-    if (localStorage.getItem('pwaInstalled') === 'true') {
-        return true;
-    }
+  // Check if app is installed
+  function isAppInstalled() {
+    if (window.matchMedia('(display-mode: standalone)').matches) return true;
+    if (window.navigator.standalone === true) return true;
+    if (localStorage.getItem('pwaInstalled') === 'true') return true;
     return false;
-}
+  }
 
-// ✅ IMMEDIATELY hide if installed (runs before anything else)
-if (isAppInstalled()) {
-    if (toast) {
-        toast.style.display = 'none';
-        console.log('Banner hidden - App is installed');
-    }
-}
+  // Immediately hide if installed
+  if (isAppInstalled()) {
+    if (toast) toast.style.display = 'none';
+  }
 
-// ✅ Also check on page load
-window.addEventListener('load', function() {
+  // beforeinstallprompt event
+  window.addEventListener('beforeinstallprompt', (e) => {
     if (isAppInstalled()) {
-        if (toast) toast.style.display = 'none';
-    }
-});
-
-// ✅ beforeinstallprompt event
-window.addEventListener('beforeinstallprompt', (e) => {
-    // Force check again
-    if (isAppInstalled()) {
-        if (toast) toast.style.display = 'none';
-        return;
+      if (toast) toast.style.display = 'none';
+      return;
     }
     
     e.preventDefault();
     deferredPrompt = e;
     
     if (toast && !isAppInstalled()) {
-        toast.style.display = 'flex';
-        toast.style.opacity = '1';
-        
-        if (autoHideTimeout) clearTimeout(autoHideTimeout);
-        
-        autoHideTimeout = setTimeout(() => {
-            toast.style.opacity = '0';
-            setTimeout(() => {
-                toast.style.display = 'none';
-                toast.style.opacity = '1';
-            }, 300);
-        }, 5000);
-    }
-});
-
-// ✅ Banner click
-if (toast) {
-    toast.addEventListener('click', (e) => {
-        if (e.target === closeBtn || closeBtn.contains(e.target)) return;
-        
-        if (deferredPrompt) {
-            deferredPrompt.prompt();
-            deferredPrompt.userChoice.then((result) => {
-                if (result.outcome === 'accepted') {
-                    localStorage.setItem('pwaInstalled', 'true');
-                }
-                deferredPrompt = null;
-            });
-            toast.style.display = 'none';
-            if (autoHideTimeout) clearTimeout(autoHideTimeout);
-        }
-    });
-}
-
-// ✅ Close button
-if (closeBtn) {
-    closeBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
+      toast.style.display = 'flex';
+      
+      if (autoHideTimeout) clearTimeout(autoHideTimeout);
+      autoHideTimeout = setTimeout(() => {
         toast.style.display = 'none';
-        deferredPrompt = null;
-        if (autoHideTimeout) clearTimeout(autoHideTimeout);
-    });
-}
+      }, 5000);
+    }
+  });
 
-// ✅ App installed event
-window.addEventListener('appinstalled', () => {
+  // Banner click
+  if (toast) {
+    toast.addEventListener('click', (e) => {
+      if (e.target === closeBtn || closeBtn.contains(e.target)) return;
+      
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((result) => {
+          if (result.outcome === 'accepted') {
+            localStorage.setItem('pwaInstalled', 'true');
+          }
+          deferredPrompt = null;
+        });
+        toast.style.display = 'none';
+        if (autoHideTimeout) clearTimeout(autoHideTimeout);
+      }
+    });
+  }
+
+  // Close button
+  if (closeBtn) {
+    closeBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toast.style.display = 'none';
+      deferredPrompt = null;
+      if (autoHideTimeout) clearTimeout(autoHideTimeout);
+    });
+  }
+
+  // App installed event
+  window.addEventListener('appinstalled', () => {
     localStorage.setItem('pwaInstalled', 'true');
     if (toast) toast.style.display = 'none';
     deferredPrompt = null;
     if (autoHideTimeout) clearTimeout(autoHideTimeout);
-});
+  });
 
   // ==========================================
-  // 12. SERVICE WORKER REGISTRATION
+  // 11. SERVICE WORKER REGISTRATION
   // ==========================================
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/com/sw.js')
@@ -1930,13 +1873,7 @@ window.addEventListener('appinstalled', () => {
   }
 
   // ==========================================
-  // 13. ANALYTICS
-  // ==========================================
-  console.log('[Analytics] Page view: PAKISTAN FF GUILD - https://pakistanffguild.github.io/com/');
-  console.log('[Web3Forms] Configured with AJAX, no redirect, no 404 error.');
-
-  // ==========================================
-  // 14. SMOOTH SCROLL & ACTIVE NAV
+  // 12. SMOOTH SCROLL & ACTIVE NAV
   // ==========================================
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
@@ -1957,7 +1894,7 @@ window.addEventListener('appinstalled', () => {
     });
   });
 
-  console.log('%c🚀 PAKISTAN FF GUILD Website Ready - Fixed Web3Forms + Removed Cookie Banner + PWA Install Toast', 'color: #FF6A00; font-size: 18px; font-weight: bold;');
+  console.log('%c🚀 PAKISTAN FF GUILD Website Ready - PWA Banner Fixed!', 'color: #FF6A00; font-size: 18px; font-weight: bold;');
 </script>
 
 </body>
