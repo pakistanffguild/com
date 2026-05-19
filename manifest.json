@@ -1,6 +1,6 @@
 {
   "name": "PAKISTAN FF GUILD",
-  "short_name": "PAKISTAN FF",
+  "short_name": "PK FF GUILD",
   "description": "Top 100 PK Free Fire Guild - Pakistan's #1 Gaming Community",
   "start_url": "/com/index.html",
   "scope": "/com/",
@@ -8,18 +8,82 @@
   "theme_color": "#FF6A00",
   "background_color": "#06080E",
   "orientation": "portrait",
+  "categories": ["games", "entertainment", "sports"],
   "icons": [
     {
-      "src": "/com/icon-192.png",
+      "src": "/com/icons/icon-72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/com/icons/icon-96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/com/icons/icon-128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/com/icons/icon-144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/com/icons/icon-152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/com/icons/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/com/icon-512.png",
+      "src": "/com/icons/icon-384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/com/icons/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
     }
-  ]
+  ],
+  "screenshots": [
+    {
+      "src": "/com/screenshots/home.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Home Screen"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Join Guild",
+      "short_name": "Join",
+      "description": "Apply to join PAKISTAN FF GUILD",
+      "url": "/com/index.html#contact",
+      "icons": [{ "src": "/com/icons/icon-96.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "WhatsApp",
+      "short_name": "WA",
+      "description": "Contact on WhatsApp",
+      "url": "/com/index.html",
+      "icons": [{ "src": "/com/icons/icon-96.png", "sizes": "96x96" }]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false
 }
