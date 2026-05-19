@@ -1181,11 +1181,11 @@
 </nav>
 
 
-<!-- ========== INSTALL BANNER (FULL WIDTH, HORIZONTAL, LIKE DOWNLOAD BAR) ========== -->
-<div id="installToast" style="display: none; position: fixed; top: 70px; left: 0; width: 100%; background: #FF6A00; color: white; padding: 12px 16px; font-weight: bold; z-index: 9999; box-shadow: 0 2px 10px rgba(0,0,0,0.2); cursor: pointer; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+<!-- ========== INSTALL BANNER ========== -->
+<div id="installToast" style="display: none; position: fixed; top: 70px; left: 0; width: 100%; background: #FF6A00; color: white; padding: 12px 16px; font-weight: bold; z-index: 9999; box-shadow: 0 2px 10px rgba(0,0,0,0.2); cursor: pointer; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
   <div style="display: flex; align-items: center; gap: 12px;">
     <img src="/com/icon-192.png" alt="App Icon" style="width: 32px; height: 32px; border-radius: 8px;">
-    <span> Install PAKISTAN FF GUILD</span>
+    <span>Install PAKISTAN FF GUILD</span>
   </div>
   <button id="closeInstallToast" style="background: transparent; border: none; color: white; font-size: 20px; cursor: pointer;">✕</button>
 </div>
@@ -1816,7 +1816,7 @@ const waMenu = document.getElementById('waMenu');
 
 
 // ==========================================
-// PWA INSTALL BANNER (Only shows on website, NOT in installed app)
+// PWA INSTALL BANNER (FIXED)
 // ==========================================
 let deferredPrompt;
 let autoHideTimeout;
@@ -1824,41 +1824,43 @@ let autoHideTimeout;
 const toast = document.getElementById('installToast');
 const closeBtn = document.getElementById('closeInstallToast');
 
-// ✅ CHECK IF APP IS INSTALLED (Standalone mode)
 function isAppInstalled() {
     return window.matchMedia('(display-mode: standalone)').matches || 
-           window.navigator.standalone === true; // For iOS
+           window.navigator.standalone === true;
 }
 
-// ✅ If app is installed, NEVER show banner
-if (isAppInstalled()) {
-    if (toast) toast.style.display = 'none';
-} else {
-    // App is NOT installed, so banner can work
-    window.addEventListener('beforeinstallprompt', (e) => {
-        e.preventDefault();
-        deferredPrompt = e;
+window.addEventListener('DOMContentLoaded', function() {
+    if (isAppInstalled()) {
+        if (toast) toast.style.display = 'none';
+    }
+});
+
+window.addEventListener('beforeinstallprompt', (e) => {
+    if (isAppInstalled()) {
+        if (toast) toast.style.display = 'none';
+        return;
+    }
+    
+    e.preventDefault();
+    deferredPrompt = e;
+    
+    if (toast) {
+        toast.style.display = 'flex';
+        toast.style.opacity = '1';
         
-        if (toast && !isAppInstalled()) {
-            toast.style.display = 'flex';
-            toast.style.opacity = '1';
-            
-            // Auto hide after 5 seconds
-            if (autoHideTimeout) clearTimeout(autoHideTimeout);
-            
-            autoHideTimeout = setTimeout(() => {
-                toast.style.opacity = '0';
-                setTimeout(() => {
-                    toast.style.display = 'none';
-                    toast.style.opacity = '1';
-                }, 300);
-            }, 5000);
-        }
-    });
-}
+        if (autoHideTimeout) clearTimeout(autoHideTimeout);
+        
+        autoHideTimeout = setTimeout(() => {
+            toast.style.opacity = '0';
+            setTimeout(() => {
+                toast.style.display = 'none';
+                toast.style.opacity = '1';
+            }, 300);
+        }, 5000);
+    }
+});
 
-// Click on banner to install
-if (toast && !isAppInstalled()) {
+if (toast) {
     toast.addEventListener('click', (e) => {
         if (e.target === closeBtn || closeBtn.contains(e.target)) return;
         
@@ -1873,7 +1875,6 @@ if (toast && !isAppInstalled()) {
     });
 }
 
-// Close button
 if (closeBtn) {
     closeBtn.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -1883,13 +1884,11 @@ if (closeBtn) {
     });
 }
 
-// When app successfully installed - hide banner permanently
 window.addEventListener('appinstalled', () => {
     if (toast) toast.style.display = 'none';
     deferredPrompt = null;
     if (autoHideTimeout) clearTimeout(autoHideTimeout);
 });
-  
 
   // ==========================================
   // 12. SERVICE WORKER REGISTRATION
