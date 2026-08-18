@@ -1585,66 +1585,71 @@ const waMenu = document.getElementById('waMenu');
   waFloat.addEventListener('click', function(e) { e.stopPropagation(); waMenuOpen = !waMenuOpen; waMenu.style.display = waMenuOpen ? 'flex' : 'none'; });
   document.addEventListener('click', function(e) { if (!waFloat.contains(e.target) && !waMenu.contains(e.target)) { waMenuOpen = false; waMenu.style.display = 'none'; } });
 
-  // ==========================================
+
+
+
+
+
+
+// ==========================================
 // 3. GUILD MEMBERS SLIDER (UPDATED WITH DATA FROM SPREADSHEET)
 // ==========================================
 const membersData = [
-  { name: 'ITACHI FF', points: 292, glory: 15719, role: 'Rusher' },
-  { name: 'HK GAMER YT', points: 164, glory: 14144, role: 'Rusher' },
-  { name: 'MOON FF', points: 182, glory: 12406, role: 'Rusher' },
-  { name: 'MOON 2 FF', points: 169, glory: 9765, role: 'Rusher' },
-  { name: 'AHMAD FF', points: 262, glory: 9331, role: 'Rusher' },
-  { name: 'INTROVERT FF', points: 246, glory: 9038, role: 'Rusher' },
-  { name: 'LEGEND FF', points: 131, glory: 8626, role: 'Rusher' },
-  { name: 'EXTROVERT FF', points: 184, glory: 8762, role: 'Rusher' },
-  { name: 'ASTROVERT FF', points: 136, glory: 8635, role: 'Rusher' },
-  { name: 'ZALIM FF', points: 204, glory: 5617, role: 'Rusher' },
-  { name: 'DICTATOR FF', points: 142, glory: 5213, role: 'Rusher' },
-  { name: 'ANAS FF', points: 125, glory: 5041, role: 'Rusher' },
-  { name: 'WHITE FF', points: 161, glory: 4648, role: 'Rusher' },
-  { name: 'MODERATOR FF', points: 7, glory: 4553, role: 'Rusher' },
-  { name: 'LAST HOPE FF', points: 212, glory: 4324, role: 'Rusher' },
-  { name: 'SIBGHAT FF', points: 103, glory: 3956, role: 'Rusher' },
-  { name: 'GANGSTER FF', points: 204, glory: 3712, role: 'Rusher' },
-  { name: 'KABEER FF', points: 172, glory: 3114, role: 'Rusher' },
-  { name: 'AGENT FF', points: 0, glory: 3038, role: 'Survivor' },
-  { name: 'HISOKA FF', points: 82, glory: 2817, role: 'Rusher' },
-  { name: 'AZIZ FF', points: 141, glory: 2584, role: 'Rusher' },
-  { name: 'APOLLO FF', points: 45, glory: 2569, role: 'Rusher' },
-  { name: 'ZAIN FF', points: 102, glory: 2554, role: 'Rusher' },
-  { name: 'MK STAR FF', points: 71, glory: 2508, role: 'Rusher' },
-  { name: 'OMNIVERT FF', points: 142, glory: 2479, role: 'Rusher' },
-  { name: 'Konkar FF', points: 109, glory: 2365, role: 'Rusher' },
-  { name: 'RAJPUT FF', points: 71, glory: 2246, role: 'Rusher' },
-  { name: 'JERRY FF', points: 118, glory: 2007, role: 'Rusher' },
-  { name: 'AFTAJ JUTT', points: 44, glory: 1969, role: 'Rusher' },
-  { name: 'BLUE ROX', points: 117, glory: 1810, role: 'Rusher' },
-  { name: 'UMER', points: 102, glory: 1651, role: 'Rusher' },
-  { name: 'SHISUI FF', points: 36, glory: 1562, role: 'Rusher' },
-  { name: 'DOREMON', points: 0, glory: 1476, role: 'Survivor' },
-  { name: 'HAMMAD FF', points: 0, glory: 1473, role: 'Survivor' },
-  { name: 'BLACK 444', points: 60, glory: 1456, role: 'Rusher' },
-  { name: 'THAN B2K', points: 68, glory: 1427, role: 'Rusher' },
-  { name: 'CAPT', points: 0, glory: 1130, role: 'Survivor' },
-  { name: 'RANA FF', points: 0, glory: 1041, role: 'Survivor' },
-  { name: 'RAYAN FF', points: 57, glory: 971, role: 'Rusher' },
-  { name: 'KGR MAFIA', points: 41, glory: 945, role: 'Rusher' },
-  { name: 'KARELA', points: 11, glory: 930, role: 'Rusher' },
-  { name: 'SPEEDY FF', points: 0, glory: 887, role: 'Survivor' },
-  { name: 'TSG GAMER', points: 81, glory: 805, role: 'Rusher' },
-  { name: 'ALI BRAND FF ', points: 47, glory: 786, role: 'Rusher' },
-  { name: 'FBI NEUXS', points: 88, glory: 595, role: 'Rusher' },
-  { name: 'NARUTO', points: 0, glory: 592, role: 'Survivor' },
-  { name: '7x OnefireX', points: 1, glory: 593, role: 'Rusher' },
-  { name: 'LE OR LOOR', points: 0, glory: 430, role: 'Survivor' },
-  { name: 'MUZI FF', points: 40, glory: 360, role: 'Rusher' },
-  { name: 'XX KASHIF', points: 12, glory: 354, role: 'Rusher' },
-  { name: 'MAN', points: 0, glory: 220, role: 'Survivor' },
-
-  
-  { name: 'KRANO 70', points: 0, glory: 90, role: 'Survivor' },
-    { name: 'OWII BRAND', points: 0, glory: 40, role: 'Survivor' },
-  { name: 'X7 EGO', points: 0, glory: 575, role: 'Survivor' }
+  { name: 'MOON FF', points: 174, glory: 18600, role: 'Rusher' },
+  { name: 'ITACHI FF', points: 313, glory: 13064, role: 'Rusher' },
+  { name: 'LEGEND FF', points: 104, glory: 10453, role: 'Rusher' },
+  { name: 'MOON FF', points: 150, glory: 8802, role: 'Rusher' },
+  { name: 'HK-GAMER.F', points: 122, glory: 8394, role: 'Rusher' },
+  { name: 'GHOST FF', points: 127, glory: 7455, role: 'Rusher' },
+  { name: 'AHMAD FF', points: 290, glory: 6440, role: 'Rusher' },
+  { name: 'DICTATOR FF', points: 145, glory: 5667, role: 'Rusher' },
+  { name: 'EXTROVERT FF', points: 138, glory: 5170, role: 'Rusher' },
+  { name: 'INTROVERT FF', points: 193, glory: 5144, role: 'Rusher' },
+  { name: 'ANAS FF', points: 117, glory: 4898, role: 'Rusher' },
+  { name: 'ZAIN FF', points: 88, glory: 4811, role: 'Rusher' },
+  { name: 'OMNIVERT FF', points: 130, glory: 4640, role: 'Rusher' },
+  { name: 'SBGHAT FF', points: 191, glory: 4497, role: 'Rusher' },
+  { name: 'CRADEEFF', points: 108, glory: 4444, role: 'Rusher' },
+  { name: 'AIZZ FF', points: 121, glory: 3987, role: 'Rusher' },
+  { name: 'ZALIM FF', points: 0, glory: 3894, role: 'Survivor' },
+  { name: 'JERRY FF', points: 77, glory: 3580, role: 'Rusher' },
+  { name: 'WHITE FF', points: 146, glory: 3310, role: 'Rusher' },
+  { name: 'ASTROVERT FF', points: 121, glory: 3246, role: 'Rusher' },
+  { name: 'MUZI FF', points: 126, glory: 3109, role: 'Rusher' },
+  { name: 'APOLLO FF', points: 7, glory: 2904, role: 'Rusher' },
+  { name: 'KABEER FF', points: 52, glory: 2827, role: 'Rusher' },
+  { name: 'MODERATOR F', points: 75, glory: 2776, role: 'Rusher' },
+  { name: 'OWU BRAND', points: 93, glory: 2729, role: 'Rusher' },
+  { name: 'HISOKA FF', points: 112, glory: 2717, role: 'Rusher' },
+  { name: 'UNKNOWN', points: 4, glory: 2635, role: 'Rusher' },
+  { name: 'LASTHOPE FF', points: 7, glory: 2464, role: 'Rusher' },
+  { name: 'MK STAR', points: 51, glory: 2481, role: 'Rusher' },
+  { name: 'PRINCE', points: 44, glory: 2419, role: 'Rusher' },
+  { name: 'BLUE ROXY', points: 69, glory: 2361, role: 'Rusher' },
+  { name: 'AFTA BUTT', points: 36, glory: 1968, role: 'Rusher' },
+  { name: 'GANGSTER FF', points: 56, glory: 1797, role: 'Rusher' },
+  { name: 'SGLEWANY', points: 89, glory: 1487, role: 'Rusher' },
+  { name: 'TW FLEXY', points: 0, glory: 1362, role: 'Survivor' },
+  { name: 'HAMMAD FF', points: 0, glory: 1297, role: 'Survivor' },
+  { name: 'SPEEDY FF', points: 8, glory: 1151, role: 'Rusher' },
+  { name: 'HITMAN', points: 11, glory: 1055, role: 'Rusher' },
+  { name: 'NARUTO', points: 0, glory: 1020, role: 'Survivor' },
+  { name: 'U-MER', points: 0, glory: 1020, role: 'Survivor' },
+  { name: 'SHISUFF', points: 5, glory: 926, role: 'Rusher' },
+  { name: 'KGR MAFIA', points: 0, glory: 890, role: 'Survivor' },
+  { name: 'AMNA', points: 0, glory: 880, role: 'Survivor' },
+  { name: 'X7 EGO', points: 153, glory: 847, role: 'Rusher' },
+  { name: 'RANA FF', points: 0, glory: 853, role: 'Survivor' },
+  { name: 'Konkhar FF', points: 14, glory: 794, role: 'Rusher' },
+  { name: '7xs Onefreex', points: 0, glory: 728, role: 'Survivor' },
+  { name: 'TOXIC', points: 0, glory: 660, role: 'Survivor' },
+  { name: 'SAAD REHMAN', points: 0, glory: 594, role: 'Survivor' },
+  { name: 'DARK EAGLE', points: 21, glory: 568, role: 'Rusher' },
+  { name: 'KASHIF FF', points: 13, glory: 525, role: 'Rusher' },
+  { name: 'ZC GOKU', points: 0, glory: 478, role: 'Survivor' },
+  { name: 'Aurora', points: 19, glory: 306, role: 'Rusher' },
+  { name: 'AGENT FF', points: 0, glory: 40, role: 'Survivor' },
+  { name: 'Only Errors', points: 0, glory: 10, role: 'Survivor' }
 ];
 
 const sliderWrapper = document.getElementById('membersSliderWrapper');
@@ -1693,6 +1698,12 @@ const swiper = new Swiper('.mySwiper', {
     1200: { slidesPerView: 5, spaceBetween: 25 },
   },
 });
+
+
+
+
+
+  
 
   // ==========================================
   // 4. FAQ ACCORDION & SEARCH
