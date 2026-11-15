@@ -1,9 +1,9 @@
 /* PAKISTAN FF GUILD - service worker (offline support). Bump V to force an update. */
-const V = "pff-v3";
-const CORE = ["./", "index.html", "manifest.json", "pwa.js",
-  "icons/icon-192.png", "icons/icon-512.png", "icons/icon-180.png", "icons/icon-maskable-512.png"];
+const V = "pff-v4";
+const CORE = ["./", "index.html", "manifest.json",
+  "icon-192.png", "icon-512.png", "icon-180.png", "icon-maskable-512.png"];
 const OPTIONAL = ["ahmad ff.jpg", "introvert ff.jpg", "hammad ff.jpg", "onefire ff.jpg"]
-  .concat(["moon-ff", "astrovert-ff", "itachi-ff", "white-ff", "ghost-ff", "kpkyasirff", "legend-ff", "hk-gamer-f", "saad-rehman", "a-dna", "anas-ff", "last-hope-ff", "x9-bra9d", "the-1st-hope", "zain-ff", "hisoka-ff", "ahmad-ff", "cradee-ff", "omnivert-ff", "hammad-ff", "x7-ego", "introvert-ff", "aziz-ff", "zalim-f", "konkhar-ff", "owii-brand", "dp-hasnan", "jerryff", "muzi-ff", "aftaj-jutt", "dictator-ff", "gangster-ff", "moderator-fi", "sbghat-ff", "blue-roxy", "speedy-ff", "shisuff", "strangerff", "toxic", "eclair", "onlyerrors", "rana-ff", "aurora", "rose-ff", "tw-flexy", "naruto", "kashif-ff", "7xs-onefirex", "nk-broken", "royal", "jano-gaim", "try-talha", "agent-ff"].map(s => "members/" + s + ".jpg"))
+  .concat(["moon-ff", "astrovert-ff", "itachi-ff", "white-ff", "ghost-ff", "kpkyasirff", "legend-ff", "hk-gamer-f", "saad-rehman", "a-dna", "anas-ff", "last-hope-ff", "x9-bra9d", "the-1st-hope", "zain-ff", "hisoka-ff", "ahmad-ff", "cradee-ff", "omnivert-ff", "hammad-ff", "x7-ego", "introvert-ff", "aziz-ff", "zalim-f", "konkhar-ff", "owii-brand", "dp-hasnan", "jerryff", "muzi-ff", "aftaj-jutt", "dictator-ff", "gangster-ff", "moderator-fi", "sbghat-ff", "blue-roxy", "speedy-ff", "shisuff", "strangerff", "toxic", "eclair", "onlyerrors", "rana-ff", "aurora", "rose-ff", "tw-flexy", "naruto", "kashif-ff", "7xs-onefirex", "nk-broken", "royal", "jano-gaim", "try-talha", "agent-ff"].concat(["ambivert-ff"]).map(s => s + ".jpg"))
   .map(encodeURI);
 
 self.addEventListener("install", e => {

@@ -6,6 +6,12 @@
 <title>PAKISTAN FF GUILD | Official Free Fire Guild | Top 5 PK | Rusher &amp; Survivor Roles</title>
 <meta name="google-site-verification" content="google11c8d08867dbabe8.html">
 <link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" type="image/png" href="icon-192.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="PK FF GUILD">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#e10600">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-6XQ2KW3294"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-6XQ2KW3294');</script>
@@ -99,9 +105,11 @@ h2{font-size:clamp(28px,5.4vw,46px);line-height:1.12;font-weight:800;margin-bott
 .stats{grid-column:1/-1;display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px;margin-top:20px}
 .st{text-align:center;padding:20px 12px}.st b{display:block;font:800 34px Sora;background:var(--fire);-webkit-background-clip:text;background-clip:text;color:transparent}.st span{font-size:13px;color:var(--mut);text-transform:uppercase;letter-spacing:.1em}
 /* members marquee */
-.mq{overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);margin-bottom:16px}
-.mq div{display:flex;gap:16px;width:max-content;animation:mqa 70s linear infinite}.mq.rv div{animation-direction:reverse;animation-duration:85s}.mq:hover div{animation-play-state:paused}
-@keyframes mqa{to{transform:translateX(-50%)}}
+.mq{overflow-x:auto;overflow-y:hidden;scrollbar-width:none;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);margin-bottom:16px}
+.mq::-webkit-scrollbar{display:none}
+.mq div{display:flex;gap:16px;width:max-content;padding:12px 4px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}.chips button{font:700 12.5px Sora;padding:9px 18px;border-radius:30px;background:rgba(255,255,255,.06);border:1px solid var(--bd);color:#fff;cursor:pointer;transition:.25s}.chips button.on{background:var(--fire);border-color:transparent}
+.mres{display:none;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px;margin-bottom:10px}.mres .mc{flex:none}
 .mc{flex:0 0 210px;text-align:center;padding:18px 12px;border-radius:22px;background:linear-gradient(160deg,#171722,#0f0f17);border:1px solid var(--bd);transition:.3s}.mc:hover{border-color:var(--o);transform:translateY(-6px);box-shadow:0 14px 40px rgba(225,6,0,.3)}
 .av{width:68px;height:68px;border-radius:50%;padding:3px;background:conic-gradient(var(--r),var(--g),var(--o),var(--r));margin:0 auto 10px;animation:rt 8s linear infinite paused}.mc:hover .av,.gc:hover .av{animation-play-state:running}
 .av i{display:grid;place-items:center;width:100%;height:100%;border-radius:50%;background:#14141c;font:800 18px Sora;font-style:normal;color:var(--g);animation:rt 8s linear infinite reverse paused}.mc:hover .av i,.gc:hover .av i{animation-play-state:running}
@@ -164,6 +172,8 @@ footer .fl{width:54px;margin:0 auto 10px}footer p{color:var(--mut);font-size:14.
 .rev{opacity:0;transform:translateY(40px);transition:opacity .9s,transform .9s cubic-bezier(.2,.7,.2,1)}.rev.in{opacity:1;transform:none}
 .grid>.rev:nth-child(2){transition-delay:.08s}.grid>.rev:nth-child(3){transition-delay:.16s}.grid>.rev:nth-child(4){transition-delay:.24s}
 @media(max-width:860px){.hero{grid-template-columns:1fr;padding-top:110px}.emb{width:min(70%,280px);order:-1}.nr .btn.sm{display:none}#glow{display:none}}
+@media(max-width:480px){.brand{font-size:12.5px}.brand .fl{width:22px}}
+.nr #instBtn{display:inline-flex;padding:9px 16px;font-size:13px}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rev{opacity:1;transform:none}}
 </style>
 </head>
@@ -184,7 +194,7 @@ footer .fl{width:54px;margin:0 auto 10px}footer p{color:var(--mut);font-size:14.
 <div id="loader"><div><svg class="fl" viewBox="0 0 100 124"><use href="#fire"/></svg><div class="sora" style="margin-top:18px;font-weight:700;color:var(--g);letter-spacing:.2em;font-size:13px">LOADING BATTLEFIELD</div><div class="lb"><i></i></div></div></div>
 
 <header id="nav"><a href="#home" class="brand"><svg class="fl" viewBox="0 0 100 124"><use href="#fire"/></svg>PAKISTAN <b>FF GUILD</b></a>
-<div class="nr"><a href="#contact" class="btn b1 sm">🔥 Join Guild</a><button id="mbtn" aria-label="Menu"><i></i><i></i><i></i></button></div></header>
+<div class="nr"><a href="#contact" class="btn b1 sm">🔥 Join Guild</a><button id="instBtn" class="btn b2 sm" type="button">📲 App</button><button id="mbtn" aria-label="Menu"><i></i><i></i><i></i></button></div></header>
 <div id="install"><span>📲 Install PAKISTAN FF GUILD</span><button id="ix" aria-label="Close">✕</button></div>
 <nav id="menu"><a href="#home"><small>01</small>Home</a><a href="#about"><small>02</small>About</a><a href="#members"><small>03</small>Members</a><a href="#services"><small>04</small>Services</a><a href="#team"><small>05</small>Leaders</a><a href="#contact"><small>06</small>Contact</a><a href="#faq"><small>07</small>FAQ</a><a href="#feedback"><small>08</small>Feedback</a><a href="#blog"><small>09</small>Blog</a><a href="#" id="legalOpen"><small>10</small>Legal</a></nav>
 
@@ -209,8 +219,11 @@ footer .fl{width:54px;margin:0 auto 10px}footer p{color:var(--mut);font-size:14.
 </div></section>
 
 <section id="members" class="rev"><div class="eb"><svg class="fl" viewBox="0 0 100 124"><use href="#fire"/></svg>Roster</div><h2>Guild <span class="gt">Members</span></h2><p class="sb">Meet our 50 active warriors</p>
-<div class="mq" id="m1"><div></div></div><div class="mq rv" id="m2"><div></div></div>
-<div class="cn"><button id="pv" aria-label="Previous">◀</button><button id="nx" aria-label="Next">▶</button></div>
+<div class="tools" style="margin-bottom:14px"><input id="mq" placeholder="🔍 Search member name..." autocomplete="off" aria-label="Search member"><button class="btn b2" id="mqb" type="button">Search</button></div>
+<div class="chips" id="mf"><button type="button" data-f="all" class="on">All</button><button type="button" data-f="Rusher">🔥 Rushers</button><button type="button" data-f="Survivor">🛡️ Survivors</button></div>
+<p id="mcount" class="sb" style="margin-bottom:14px"></p><div class="mres" id="mres"></div>
+<div id="msl"><div class="mq" id="m1"><div></div></div><div class="mq" id="m2"><div></div></div>
+<div class="cn"><button id="pv" aria-label="Previous">◀</button><button id="nx" aria-label="Next">▶</button></div></div>
 <p class="sb" style="margin:14px auto 0;text-align:center"><b style="color:var(--g)">🔥 Rusher:</b> 150+ Points &nbsp;|&nbsp; <b style="color:var(--g)">🛡️ Survivor:</b> 100+ Points</p></section>
 
 <section id="services" class="rev"><div class="eb"><svg class="fl" viewBox="0 0 100 124"><use href="#fire"/></svg>Perks</div><h2>Guild <span class="gt">Services &amp; Perks</span></h2><p class="sb">Everything we offer to help you become a champion</p><div class="grid" id="svc"></div></section>
@@ -279,6 +292,8 @@ const LEGAL={"Privacy Policy":"We collect game name, UID, WhatsApp number, email
 const SOC=[["fb","#"],["x","#"],["ig","#"],["li","#"],["tt","#"],["yt","#"],["wa","https://wa.me/923447041131"]];
 const ico=n=>`<svg class="i"><use href="#i-${n}"/></svg>`;
 const $=s=>document.querySelector(s);
+const BASE=(()=>{let p=location.pathname;if(/\.[a-z0-9]+$/i.test(p))p=p.replace(/[^/]*$/,"");else if(!p.endsWith("/"))p+="/";return p})();
+const slug=n=>n.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"");
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const ini=n=>n.replace(/[^A-Za-z0-9 ]/g,"").trim().split(/\s+/).map(w=>w[0]).join("").slice(0,2).toUpperCase();
 addEventListener("load",()=>setTimeout(()=>$("#loader").classList.add("off"),1400));
@@ -298,15 +313,39 @@ const mk=()=>({x:Math.random()*w,y:h+10,r:Math.random()*2.4+.6,v:Math.random()*1
 for(let i=0;i<70;i++){const p=mk();p.y=Math.random()*h;P.push(p)}
 new IntersectionObserver(e=>on=e[0].isIntersecting).observe(c);
 (function f(){if(on){x.clearRect(0,0,w,h);P.forEach((p,i)=>{p.y-=p.v;p.x+=p.d+Math.sin(p.y/40)*.3;p.a-=.002;if(p.y<-10||p.a<=0)P[i]=mk();x.beginPath();x.fillStyle=`rgba(${p.c},${p.a})`;x.shadowColor="rgba(225,6,0,.9)";x.shadowBlur=10;x.arc(p.x,p.y,p.r,0,6.3);x.fill()})}requestAnimationFrame(f)})()})();
+/* member photos: flat files or members/ folder, any of jpg/png/jpeg */
+const LF={"ahmad-ff":"ahmad ff","introvert-ff":"introvert ff","hammad-ff":"hammad ff","ambivert-ff":"onefire ff"};
+function pimg(n){const s=slug(n),c=[];["jpg","png","jpeg","webp"].forEach(e=>{c.push(BASE+s+"."+e);c.push(BASE+"members/"+s+"."+e)});if(LF[s])["jpg","png","jpeg"].forEach(e=>c.push(BASE+encodeURI(LF[s])+"."+e));
+ return `<img src="${c[0]}" data-c='${JSON.stringify(c.slice(1))}' alt="${esc(n)}" decoding="async" onerror="pe(this)">`}
+window.pe=function(i){let l=[];try{l=JSON.parse(i.dataset.c||"[]")}catch(e){}if(l.length){i.dataset.c=JSON.stringify(l.slice(1));i.src=l[0]}else i.remove()};
 /* members marquee */
-const mcard=m=>`<div class="mc"><div class="av"><i>${esc(ini(m.n))}</i></div><b>${esc(m.n)}</b><small>Points: ${m.p}</small><em>${m.r==="Rusher"?"🔥":"🛡️"} ${m.g} pts</em><span class="rb ${m.r==="Rusher"?"":"s"}">${m.r}</span></div>`;
-const h1=MEM.slice(0,26).map(mcard).join(""),h2=MEM.slice(26).map(mcard).join("");
-$("#m1 div").innerHTML=h1+h1;$("#m2 div").innerHTML=h2+h2+h2+h2;
-const nudge=d=>[$("#m1"),$("#m2")].forEach(m=>m.scrollBy({left:d,behavior:"smooth"}));$("#nx").onclick=()=>nudge(420);$("#pv").onclick=()=>nudge(-420);
+const mcard=m=>`<div class="mc"><div class="av"><i>${esc(ini(m.n))}${pimg(m.n)}</i></div><b>${esc(m.n)}</b><small>Points: ${m.p}</small><em>${m.r==="Rusher"?"🔥":"🛡️"} ${m.g} pts</em><span class="rb ${m.r==="Rusher"?"":"s"}">${m.r}</span></div>`;
+const rowA=MEM.slice(0,26).map(mcard).join(""),rowB=MEM.slice(26).map(mcard).join("");
+$("#m1 div").innerHTML=rowA+rowA;$("#m2 div").innerHTML=rowB+rowB;
+function slider(el,dir){if(matchMedia("(prefers-reduced-motion:reduce)").matches)return;
+ let pos=null,paused=false,vis=true,t;const half=()=>el.scrollWidth/2;
+ new IntersectionObserver(e=>vis=e[0].isIntersecting).observe(el);
+ const stop=()=>{paused=true;clearTimeout(t)},go=()=>{clearTimeout(t);t=setTimeout(()=>{pos=el.scrollLeft;paused=false},2000)};
+ ["touchstart","pointerdown","wheel","mouseenter"].forEach(e=>el.addEventListener(e,stop,{passive:true}));
+ ["touchend","pointerup","pointercancel","mouseleave"].forEach(e=>el.addEventListener(e,go,{passive:true}));
+ el.addEventListener("scroll",()=>{const h=half();if(!h)return;if(el.scrollLeft>=h)el.scrollLeft-=h;else if(el.scrollLeft<=0&&paused)el.scrollLeft+=h},{passive:true});
+ el._pause=()=>{stop();go()};
+ (function f(){const h=half();if(h&&!paused&&vis){if(pos===null)pos=dir<0?h:0;pos+=dir*.6;if(pos>=h)pos-=h;if(pos<0)pos+=h;el.scrollLeft=pos}requestAnimationFrame(f)})()}
+slider($("#m1"),1);slider($("#m2"),-1);
+const nudge=d=>[$("#m1"),$("#m2")].forEach(m=>{if(m._pause)m._pause();m.scrollBy({left:d,behavior:"smooth"})});$("#nx").onclick=()=>nudge(460);$("#pv").onclick=()=>nudge(-460);
+/* member search */
+const nz=s=>s.toLowerCase().replace(/[^a-z0-9]/g,"");let mfil="all";
+function msearch(){const raw=$("#mq").value.trim(),q=nz(raw),box=$("#mres"),cnt=$("#mcount");
+ if(!q&&mfil==="all"){box.style.display="none";cnt.textContent="";$("#msl").style.display="";return}
+ const list=MEM.filter(m=>(mfil==="all"||m.r===mfil)&&(!q||nz(m.n).includes(q)));
+ $("#msl").style.display="none";box.style.display="grid";box.innerHTML=list.map(mcard).join("");
+ cnt.textContent=list.length?list.length+" member"+(list.length>1?"s":"")+" found":"No member found"+(raw?" for “"+raw+"”":"")}
+$("#mq").oninput=msearch;$("#mqb").onclick=msearch;$("#mq").onkeydown=e=>{if(e.key==="Enter")msearch()};
+$("#mf").onclick=e=>{const b=e.target.closest("button");if(!b)return;mfil=b.dataset.f;[...$("#mf").children].forEach(x=>x.classList.toggle("on",x===b));msearch()};
 /* services + tracker */
 const R=MEM.filter(m=>m.r==="Rusher").length,S=MEM.length-R;
 $("#svc").innerHTML=SVC.map(s=>`<div class="gc tilt rev"><div class="ico">${s[0]}</div><h3>${s[1]}</h3><p>${s[2]}</p></div>`).join("")+`<div class="gc tilt rev nl"><div class="ico">📊</div><h3>Monthly Member Tracker</h3><p>Rusher (150+) &amp; Survivor (100+) counts</p><div class="trk"><div><b data-n="${MEM.length}">0</b><span>Total Members</span></div><div><b data-n="${R}">0</b><span>🔥 Rushers</span></div><div><b data-n="${S}">0</b><span>🛡️ Survivors</span></div></div><a class="btn b1" style="width:100%" href="https://drive.google.com/file/d/1tqriD2j1yOPFSSbxpBWdViu3wq8CCQTE/view?usp=drivesdk" target="_blank" rel="noopener">View Full Member Data ↗</a></div>`;
-$("#tm").innerHTML=LEADERS.map(l=>`<div class="gc tilt ctr rev"><div class="av l"><i>${ini(l[0])}<img src="${l[5]}" alt="${l[0]}" loading="lazy" onerror="this.remove()"></i></div><h3 class="sora">${l[0]}</h3><span class="pill">${l[1]}</span><p>${l[2]}</p><div class="soc">${l[4].map(x=>`<a href="#" aria-label="${x}">${ico(x)}</a>`).join("")}<a href="https://wa.me/${l[3]}" target="_blank" rel="noopener" aria-label="WhatsApp">${ico("wa")}</a></div></div>`).join("");
+$("#tm").innerHTML=LEADERS.map(l=>`<div class="gc tilt ctr rev"><div class="av l"><i>${ini(l[0])}${pimg(l[0])}</i></div><h3 class="sora">${l[0]}</h3><span class="pill">${l[1]}</span><p>${l[2]}</p><div class="soc">${l[4].map(x=>`<a href="#" aria-label="${x}">${ico(x)}</a>`).join("")}<a href="https://wa.me/${l[3]}" target="_blank" rel="noopener" aria-label="WhatsApp">${ico("wa")}</a></div></div>`).join("");
 /* WhatsApp corner */
 $("#wam").innerHTML=[["👑 Guild Leader","923447041131","Guild%20Leader%20-%20Join%20Request"],["🧑‍🚀 Acting Leader","923055826220","Acting%20Leader%20-%20Join%20Request"],["👔 Elder 1","921548515051","Elder%20-%20Join%20Request"],["🤝 Elder 2","923243086936","Elder%20-%20Join%20Request"]].map(a=>`<a href="https://wa.me/${a[1]}?text=${a[2]}" target="_blank" rel="noopener">${a[0]}</a>`).join("")+'<a href="https://chat.whatsapp.com/BED6bDmhFaCFwJrZott8T8?mode=gi_t" target="_blank" rel="noopener">💬 WhatsApp Groups</a>';
 $("#wab").onclick=e=>{e.stopPropagation();const m=$("#wam");m.style.display=m.style.display==="flex"?"none":"flex"};
@@ -467,12 +506,26 @@ const t="Guild wars run 7:00 PM – 11:00 PM PKT on "+full[0]+", "+full[1]+" & "
 if(FAQ[3][1]!==t){FAQ[3][1]=t;renderFaq()}}
 sched();setInterval(sched,36e5);
 document.querySelectorAll(".sh a").forEach(a=>{const h=a.href,n=h.includes("wa.me")?"wa":h.includes("facebook")?"fb":h.includes("twitter")?"x":"";if(n)a.insertAdjacentHTML("afterbegin",ico(n))});
-/* Install banner + service worker (work on your own hosted domain) */
-let dp;const ib=$("#install");
-addEventListener("beforeinstallprompt",e=>{if(matchMedia("(display-mode: standalone)").matches)return;e.preventDefault();dp=e;ib.style.display="flex"});
-ib.onclick=e=>{if(e.target.id==="ix"){ib.style.display="none";dp=null;return}if(dp){dp.prompt();dp=null;ib.style.display="none"}};
-addEventListener("appinstalled",()=>ib.style.display="none");
-if("serviceWorker" in navigator)navigator.serviceWorker.register("/com/sw.js").catch(()=>{});
+/* ===== Install app (PWA) + offline ===== */
+let dp=null;const ib=$("#install"),inst=$("#instBtn"),KEY="pffInstallHide";
+const standalone=()=>matchMedia("(display-mode: standalone)").matches||navigator.standalone===true;
+const snoozed=()=>{try{return +localStorage.getItem(KEY)>Date.now()}catch(e){return false}};
+const snooze=()=>{try{localStorage.setItem(KEY,Date.now()+864e5)}catch(e){}};
+const IOS=/iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
+const INAPP=/FBAN|FBAV|Instagram|Line\/|; wv\)|TikTok|Snapchat/i.test(navigator.userAgent);
+function helpText(){return IOS?"In Safari tap <b>Share ⬆</b> at the bottom, then <b>Add to Home Screen</b>.":INAPP?"This is an in-app browser. Open the <b>⋮ / ⋯</b> menu and choose <b>Open in Chrome</b>, then install from there.":"In Chrome open the <b>⋮</b> menu (top right) and tap <b>Install app</b> (or <b>Add to Home screen</b>)."}
+function showHelp(){$("#mbox").innerHTML='<h3 class="sora" style="font-size:19px;margin-bottom:10px">📲 Install App</h3><p>'+helpText()+'</p><button class="btn b1" style="margin-top:18px" data-x>OK</button>';$("#modal").classList.add("on")}
+function banner(txt){ib.innerHTML="<span>"+txt+"</span><span style='display:flex;gap:8px;align-items:center;flex:none'><b style='background:#fff;color:#c40500;padding:6px 14px;border-radius:20px;font-size:13px'>Install</b><button id='ix' aria-label='Close'>✕</button></span>";ib.style.display="flex"}
+function doInstall(){if(dp){const e=dp;dp=null;e.prompt();e.userChoice.then(r=>{if(r.outcome==="accepted")ib.style.display="none"})}else showHelp()}
+if(standalone()){inst.style.display="none"}else{
+ addEventListener("beforeinstallprompt",e=>{e.preventDefault();dp=e;if(!snoozed())banner("📲 Install PAKISTAN FF GUILD app")});
+ setTimeout(()=>{if(!snoozed()&&ib.style.display!=="flex")banner("📲 Install PAKISTAN FF GUILD app")},2500)}
+ib.onclick=e=>{if(e.target.closest("#ix")){ib.style.display="none";snooze();return}doInstall()};
+inst.onclick=doInstall;
+addEventListener("appinstalled",()=>{ib.style.display="none";inst.style.display="none";toast("✅ App installed!")});
+addEventListener("offline",()=>toast("📴 Offline mode – saved pages still work",true));
+addEventListener("online",()=>toast("✅ Back online"));
+if("serviceWorker" in navigator)addEventListener("load",()=>navigator.serviceWorker.register(BASE+"sw.js",{scope:BASE}).catch(()=>{}));
 /* 3D tilt cards */
 function bindTilt(){if(!matchMedia("(pointer:fine)").matches)return;document.querySelectorAll(".tilt:not([data-t])").forEach(c=>{c.dataset.t=1;
 c.addEventListener("pointermove",e=>{const b=c.getBoundingClientRect(),px=(e.clientX-b.left)/b.width,py=(e.clientY-b.top)/b.height;c.style.setProperty("--ry",((px-.5)*10)+"deg");c.style.setProperty("--rx",((.5-py)*10)+"deg");c.style.setProperty("--mx",px*100+"%");c.style.setProperty("--my",py*100+"%")});
@@ -485,6 +538,5 @@ const co=new IntersectionObserver(es=>es.forEach(en=>{if(!en.isIntersecting)retu
 (function f(t){const p=Math.min((t-t0)/1700,1);el.textContent=Math.round(n*(1-Math.pow(1-p,3)))+(p===1?s:"");if(p<1)requestAnimationFrame(f)})(t0);co.unobserve(el)}),{threshold:.5});
 document.querySelectorAll("[data-n]").forEach(e=>co.observe(e));
 </script>
-<script src="pwa.js"></script>
 </body>
 </html>

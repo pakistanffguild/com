@@ -1,3 +1,3 @@
-UPLOAD: extract this zip, then upload EVERYTHING (index.html, manifest.json, sw.js, pwa.js, icons/, members/ and the 4 leader .jpg files) into your GitHub /com/ folder. Replace the old files. Nothing else to edit.
-PHOTOS: every member and leader already has a generated avatar picture. To use a real photo later, upload a square .jpg with the SAME file name (members/<name>.jpg, or the leader file in the main folder) and it replaces the avatar. File names are lowercase.
-TEST: open the site on Android Chrome (https): Install banner appears; after one visit it works offline.
+UPLOAD (phone or PC): extract this zip and upload ALL files (no folders needed) into your GitHub /com/ folder, next to nothing else - replace the old files. Commit.
+Then open the site in Chrome: the Install banner shows at the top and there is also an install button. After the first visit the site works offline.
+PHOTOS: member photo = <name>.jpg in lowercase with dashes (moon-ff.jpg). Leaders: ahmad ff.jpg, introvert ff.jpg, hammad ff.jpg, onefire ff.jpg. Upload a new file with the same name to replace a picture.
