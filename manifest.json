@@ -52,5 +52,12 @@
       "short_name": "FAQ",
       "url": "./#faq"
     }
-  ]
+  ],
+  "related_applications": [
+    {
+      "platform": "webapp",
+      "url": "https://pakistanffguild.github.io/com/manifest.json"
+    }
+  ],
+  "prefer_related_applications": false
 }

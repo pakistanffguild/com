@@ -1,5 +1,5 @@
 /* PAKISTAN FF GUILD - service worker (offline support). Bump V to force an update. */
-const V = "pff-v6";
+const V = "pff-v7";
 const CORE = ["./", "index.html", "manifest.json",
   "icon-192.png", "icon-512.png", "icon-180.png", "icon-maskable-512.png"];
 const OPTIONAL = ["ahmad ff.jpg", "introvert ff.jpg", "hammad ff.jpg", "onefire ff.jpg"]

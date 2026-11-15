@@ -518,22 +518,24 @@ if(FAQ[3][1]!==t){FAQ[3][1]=t;renderFaq()}}
 sched();setInterval(sched,36e5);
 document.querySelectorAll(".sh a").forEach(a=>{const h=a.href,n=h.includes("wa.me")?"wa":h.includes("facebook")?"fb":h.includes("twitter")?"x":"";if(n)a.insertAdjacentHTML("afterbegin",ico(n))});
 /* ===== Install app (PWA) + offline ===== */
-let dp=null;const ib=$("#install"),KEY="pffInstallHide";
+let dp=null,shown=false,hideT=null;const ib=$("#install"),FLAG="pffInstalled";
 const standalone=()=>matchMedia("(display-mode: standalone)").matches||navigator.standalone===true;
-try{localStorage.removeItem(KEY)}catch(e){}
-const snoozed=()=>false;
-const snooze=()=>{};
+const isInst=()=>{try{return localStorage.getItem(FLAG)==="1"}catch(e){return false}};
+const setInst=()=>{try{localStorage.setItem(FLAG,"1")}catch(e){}};
+const clrInst=()=>{try{localStorage.removeItem(FLAG)}catch(e){}};
 const IOS=/iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
 const INAPP=/FBAN|FBAV|Instagram|Line\/|; wv\)|TikTok|Snapchat/i.test(navigator.userAgent);
 function helpText(){return IOS?"In Safari tap <b>Share ⬆</b> at the bottom, then <b>Add to Home Screen</b>.":INAPP?"This is an in-app browser. Open the <b>⋮ / ⋯</b> menu and choose <b>Open in Chrome</b>, then install from there.":"In Chrome open the <b>⋮</b> menu (top right) and tap <b>Install app</b> (or <b>Add to Home screen</b>)."}
 function showHelp(){$("#mbox").innerHTML='<h3 class="sora" style="font-size:19px;margin-bottom:10px">📲 Install App</h3><p>'+helpText()+'</p><button class="btn b1" style="margin-top:18px" data-x>OK</button>';$("#modal").classList.add("on")}
-function banner(txt){ib.innerHTML="<span>"+txt+"</span><span style='display:flex;gap:8px;align-items:center;flex:none'><b style='background:#fff;color:#c40500;padding:6px 14px;border-radius:20px;font-size:13px'>Install</b><button id='ix' aria-label='Close'>✕</button></span>";ib.style.display="flex"}
-function doInstall(){if(dp){const e=dp;dp=null;e.prompt();e.userChoice.then(r=>{if(r.outcome==="accepted")ib.style.display="none"})}else showHelp()}
-if(!standalone()){
- addEventListener("beforeinstallprompt",e=>{e.preventDefault();dp=e;if(!snoozed())banner("📲 Install PAKISTAN FF GUILD app")});
- setTimeout(()=>{if(!snoozed()&&ib.style.display!=="flex")banner("📲 Install PAKISTAN FF GUILD app")},1800)}
-ib.onclick=e=>{if(e.target.closest("#ix")){ib.style.display="none";snooze();return}doInstall()};
-addEventListener("appinstalled",()=>{ib.style.display="none";toast("✅ App installed!")});
+function hideBanner(){clearTimeout(hideT);ib.style.display="none"}
+function banner(txt){if(shown)return;shown=true;ib.innerHTML="<span>"+txt+"</span><span style='display:flex;gap:8px;align-items:center;flex:none'><b style='background:#fff;color:#c40500;padding:6px 14px;border-radius:20px;font-size:13px'>Install</b><button id='ix' aria-label='Close'>✕</button></span>";ib.style.display="flex";hideT=setTimeout(hideBanner,5000)}
+function doInstall(){if(dp){const e=dp;dp=null;e.prompt();e.userChoice.then(r=>{if(r.outcome==="accepted"){setInst();hideBanner()}})}else showHelp()}
+if(standalone()){setInst()}else{
+ addEventListener("beforeinstallprompt",e=>{e.preventDefault();dp=e;clrInst();banner("📲 Install PAKISTAN FF GUILD app")});
+ try{if(navigator.getInstalledRelatedApps)navigator.getInstalledRelatedApps().then(a=>{if(a&&a.length){setInst();hideBanner()}}).catch(()=>{})}catch(e){}
+ setTimeout(()=>{if(!isInst())banner("📲 Install PAKISTAN FF GUILD app")},1800)}
+ib.onclick=e=>{if(e.target.closest("#ix")){hideBanner();return}doInstall()};
+addEventListener("appinstalled",()=>{setInst();hideBanner();toast("✅ App installed!")});
 addEventListener("offline",()=>toast("📴 Offline mode – saved pages still work",true));
 addEventListener("online",()=>toast("✅ Back online"));
 if("serviceWorker" in navigator)addEventListener("load",()=>navigator.serviceWorker.register(BASE+"sw.js",{scope:BASE}).catch(()=>{}));
